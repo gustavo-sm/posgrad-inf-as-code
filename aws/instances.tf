@@ -3,7 +3,7 @@ module "ami" {
 }
 
 module "security_group" {
-  source = "./modules/securitygroup"
+  source = "./modules/security_group"
 }
 
 module "key_pair" {

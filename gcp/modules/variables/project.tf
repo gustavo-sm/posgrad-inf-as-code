@@ -1,6 +1,6 @@
 variable "project_id" {
     type = string
-    default = "prj-iac-369104"
+    default = ""
 }
 
 output "project_id" { 

@@ -29,8 +29,7 @@ resource "aws_instance" "LAMP_server" {
   provisioner "remote-exec" {
     inline = [
       "sudo apt update -y",
-      "sudo apt install apache2 mysql-server php libapache2-mod-php php-mysql -y",
-      "exit"
+      "sudo apt install apache2 mysql-server php libapache2-mod-php -y"
     ]
 
   }
@@ -44,7 +43,7 @@ resource "aws_instance" "LAMP_server" {
 }
 
 resource "aws_instance" "Jenkins_server" {
-  ami           = module.ami.ubuntu_ami_id
+  ami           = module.ami.amazon_linux_ami_id
   instance_type = "t2.micro"
   key_name = module.key_pair.key_pair_name
   security_groups = [module.security_group.sg_name_jenkinsserver]
@@ -61,18 +60,21 @@ resource "aws_instance" "Jenkins_server" {
 
   provisioner "remote-exec" {
     inline = [
-      "wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -",
-      "sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'",
-      "sudo apt update -y",
-      "sudo apt install jenkins",
-      "sudo systemctl start jenkins",
-      "exit"
+      "sudo yum update -y",
+      "sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo",
+      "sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key",
+      "sudo yum upgrade -y",
+      "sudo amazon-linux-extras install epel java-openjdk11 -y",
+      "sudo yum install jenkins -y",
+      "sudo systemctl enable jenkins",
+      "sudo systemctl start jenkins"
     ]
   }
+
   connection {
     type        = "ssh"
     host        = self.public_ip
-    user        = "ubuntu"
+    user        = "ec2-user"
     private_key = file("./keys/${self.key_name}.pem")
   }
 }

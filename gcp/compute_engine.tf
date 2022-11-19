@@ -5,6 +5,11 @@ module "networking" {
     source = "./modules/networking"
 }
 
+module "ssh_key" {
+    source = "./modules/key_pair"
+}
+
+
 resource "google_compute_instance" "rundeck-server" {
     name         = "rundeck-server"
     machine_type = "e2-small"
@@ -16,15 +21,29 @@ resource "google_compute_instance" "rundeck-server" {
       }
     }
 
-    //access_config = {}
-
     network_interface {
         network = module.vars.network
         access_config {
             nat_ip = module.networking.rundeck-static-address
         }
     }
+    metadata = {
+        ssh-keys = "${module.vars.vm-user}:${module.ssh_key.public_key}"
+    }
     
-    metadata_startup_script = "echo hi > /test.txt"
+    provisioner "remote-exec" {
+      connection {
+        host        = module.networking.rundeck-static-address
+        type        = "ssh"
+        user        = module.vars.vm-user
+        timeout     = "500s"
+        private_key = file("./keys/${module.ssh_key.private_key_name}.pem")
+      }
+      inline = [    
+        "sudo apt-get update -y",
+        "sudo apt-get install openjdk-11-jre-headless -y",
+        "curl https://raw.githubusercontent.com/rundeck/packaging/main/scripts/deb-setup.sh 2> /dev/null | sudo bash -s rundeckpro",
+      ]
+    }
 
 }

@@ -1,4 +1,4 @@
-data "aws_ami" "ubuntu" {
+data "aws_ami" "ubuntu_ami" {
   most_recent = true
 
   filter {
@@ -14,6 +14,6 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
-output "ami_id" {
-  value = data.aws_ami.ubuntu.id
+output "ubuntu_ami_id" {
+  value = data.aws_ami.ubuntu_ami.id
 }

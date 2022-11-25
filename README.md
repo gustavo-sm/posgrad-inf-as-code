@@ -32,19 +32,17 @@ Após a criação, um JSON será baixado, renomeie-o para “**credentials.json*
 A autenticação para o GCP acontecerá com base no credentials.json conforme descrito no passo 1.
 
 
-2) Clonar o projeto, e então, no diretório do projeto, entrar no diretorio 	gcp/modules/variables, editar os arquivos vm-user.tf e project.tf, colocando o nome de usuário da 	sua conta na variavel vm-user e ID de seu projeto na variavel project_id. 
+3) Clonar o projeto, e então, no diretório do projeto, entrar no diretorio 	gcp/modules/variables, editar os arquivos vm-user.tf e project.tf, colocando o nome de usuário da 	sua conta na variavel vm-user e ID de seu projeto na variavel project_id. 
 
 
-3) Executar os comandos **terraform -chdir=aws init** e **terraform -chdir=gcp init** para a inicialização dos modulos de ambos os provedores.
+4) Executar os comandos **terraform -chdir=aws init** e **terraform -chdir=gcp init** para a inicialização dos modulos de ambos os provedores.
 
 
-4) Executar **terraform -chdir=aws plan** e **terraform -chdir=gcp plan** para conferir as infraestruturas a serem cr**iadas.
+5) Executar **terraform -chdir=aws plan** e **terraform -chdir=gcp plan** para conferir as infraestruturas a serem cr**iadas.
 
 
-5)  Aplicar com **terraform -chdir=aws apply** e **terraform -chdir=gcp apply**.
+6)  Aplicar com **terraform -chdir=aws apply** e **terraform -chdir=gcp apply**.
 
 Observação: durante a criação das instâncias de VM (ec2 e compute engine), as chaves privadas 	serão armazenadas da seguinte maneira localmente: 	<dir_do_provedor>/keys/instance_key_<id_da_chave>*
 
 *o par de chaves está sendo criado com o recurso **tls_private_key**, ao executar o destroy nas instancias, a chave também será deletada do diretorio keys/ local.
-
-	

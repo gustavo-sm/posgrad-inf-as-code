@@ -38,7 +38,7 @@ A autenticação para o GCP acontecerá com base no credentials.json conforme de
 4) Executar os comandos **terraform -chdir=aws init** e **terraform -chdir=gcp init** para a inicialização dos modulos de ambos os provedores.
 
 
-5) Executar **terraform -chdir=aws plan** e **terraform -chdir=gcp plan** para conferir as infraestruturas a serem cr**iadas.
+5) Executar **terraform -chdir=aws plan** e **terraform -chdir=gcp plan** para conferir as infraestruturas a serem criadas.
 
 
 6)  Aplicar com **terraform -chdir=aws apply** e **terraform -chdir=gcp apply**.

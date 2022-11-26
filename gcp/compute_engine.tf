@@ -30,6 +30,11 @@ resource "google_compute_instance" "rundeck-server" {
     metadata = {
         ssh-keys = "${module.vars.vm-user}:${module.ssh_key.public_key}"
     }
+
+      provisioner "file" {
+        source      = "./provisioning_scripts/rundeck.sh"
+        destination = "/tmp/rundeck.sh"
+      }
     
     provisioner "remote-exec" {
       connection {
@@ -40,14 +45,16 @@ resource "google_compute_instance" "rundeck-server" {
         private_key = file("./keys/${module.ssh_key.private_key_name}.pem")
       }
 
-      inline = [    
-        "sudo sh ./provisioning_scripts/rundeck.sh"
+
+      inline = [
+        "sudo chmod +x /tmp/rundeck.sh",
+        "sudo sh /tmp/rundeck.sh"
       ]
     }
 
     service_account {
       # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-      email  = ""
+      email  = "tf-iac@prj-iac-369104.iam.gserviceaccount.com"
       scopes = ["cloud-platform"]
     }
 

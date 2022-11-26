@@ -1,6 +1,6 @@
 variable "vm-user" {
     type = string
-    default = "vm-user" #colocar nome de usuario do gcp que estará utilizando
+    default = "gustavo1sad" #colocar nome de usuario do gcp que estará utilizando
 }
 
 output "vm-user" {

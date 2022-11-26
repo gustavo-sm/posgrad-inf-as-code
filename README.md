@@ -5,7 +5,7 @@ Tarefa pós-graduação para aplicação de práticas de IaC com Terraform.
 ![trabalho](https://user-images.githubusercontent.com/80229794/202351584-c5b8e045-8005-4e02-9e81-67b688ec57ff.png)
 
 ### **Configuração do projeto**:  
-* Server01 (Run Deck – Debian) – **GCP**;
+* Server01 (Run Deck – Centos) – **GCP**;
 * Server02 (Jenkins – Amazon Linux) – **AWS**;
 * Server03 (LAMP – Ubuntu) – **AWS**;
 * Um bucket em cada provedor.

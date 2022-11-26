@@ -26,9 +26,15 @@ resource "aws_instance" "LAMP_server" {
     command = "rm -f ./keys/${self.key_name}.pem"
   }
 
+  provisioner "file" {
+    source      = "./provisioning_scripts/LAMP.sh"
+    destination = "/tmp/LAMP.sh"
+  }
+
   provisioner "remote-exec" {
     inline = [
-      "sudo sh ./provisioning_scripts/LAMP.sh"
+      "sudo chmod +x /tmp/LAMP.sh",
+      "sudo sh /tmp/LAMP.sh"
     ]
 
   }
@@ -57,11 +63,18 @@ resource "aws_instance" "Jenkins_server" {
     command = "rm -f ./keys/${self.key_name}.pem"
   }
 
+  provisioner "file" {
+    source      = "./provisioning_scripts/jenkins.sh"
+    destination = "/tmp/jenkins.sh"
+  }
+
   provisioner "remote-exec" {
     inline = [
-      "sudo sh ./provisioning_scripts/jenkins.sh"
+      "sudo chmod +x /tmp/jenkins.sh",
+      "sudo sh /tmp/jenkins.sh"
     ]
   }
+
 
   connection {
     type        = "ssh"

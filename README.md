@@ -15,7 +15,7 @@ Para cada provedor escolhido, foram criadas duas pastas, um para cada provedor e
 ### **Passo a passo para execução do projeto**:
 
 1) Na AWS, criar um usuário com acesso programático e fazendo parte de um grupo com as seguintes as roles **AmazonEC2FullAccess** e **AmazonS3FullAccess**.
-No GCP, deve-se criar um projeto novo e uma conta de serviço com permissões de acesso ao **compute engine** e **storage**.
+No GCP, deve-se criar um projeto novo e uma conta de serviço com permissões de acesso **Administrador do compute engine** e **Administrador do storage**.
 
 ![image](https://user-images.githubusercontent.com/80229794/203906523-2c6e241e-ac69-4114-bdc7-2ad61ee3042d.png)
 

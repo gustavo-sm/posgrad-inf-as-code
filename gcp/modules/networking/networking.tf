@@ -7,7 +7,7 @@ resource "google_compute_firewall" "rundeck-firewall" {
   network = module.vars.network
   allow {
     protocol = "tcp"
-    ports    = ["22", "4440", "4443"]
+    ports    = ["22", "4440", "4443", "80"]
   }
   source_ranges = ["0.0.0.0/0"]
 }

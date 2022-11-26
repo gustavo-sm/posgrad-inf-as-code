@@ -1,6 +1,6 @@
 variable "project_id" {
     type = string
-    default = "" #colocar o ID do projeto que estará utilizando aqui
+    default = "prj-iac-369104" #colocar o ID do projeto que estará utilizando aqui
 }
 
 output "project_id" { 

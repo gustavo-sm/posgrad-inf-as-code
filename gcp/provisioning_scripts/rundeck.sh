@@ -1,4 +1,7 @@
 #!/bin/bash
-sudo apt-get update -y
-sudo apt-get install openjdk-11-jre-headless -y
-curl https://raw.githubusercontent.com/rundeck/packaging/main/scripts/deb-setup.sh 2> /dev/null | sudo bash -s rundeckpro
+sudo yum update -y
+sudo yum install java-11-openjdk -y
+curl https://raw.githubusercontent.com/rundeck/packaging/main/scripts/rpm-setup.sh 2> /dev/null | bash -s rundeck
+sudo yum install rundeck -y
+sudo systemctl start rundeckd
+sudo systemctl enable rundeckd

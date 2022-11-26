@@ -17,7 +17,7 @@ resource "google_compute_instance" "rundeck-server" {
 
     boot_disk {
       initialize_params {
-          image = module.vars.debian_image
+          image = module.vars.centos_image
       }
     }
 
@@ -39,9 +39,16 @@ resource "google_compute_instance" "rundeck-server" {
         timeout     = "500s"
         private_key = file("./keys/${module.ssh_key.private_key_name}.pem")
       }
+
       inline = [    
         "sudo sh ./provisioning_scripts/rundeck.sh"
       ]
+    }
+
+    service_account {
+      # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
+      email  = "tf-iac@prj-iac-369104.iam.gserviceaccount.com "
+      scopes = ["cloud-platform"]
     }
 
 }

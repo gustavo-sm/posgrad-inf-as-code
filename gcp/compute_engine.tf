@@ -47,7 +47,7 @@ resource "google_compute_instance" "rundeck-server" {
 
     service_account {
       # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-      email  = "tf-iac@prj-iac-369104.iam.gserviceaccount.com "
+      email  = ""
       scopes = ["cloud-platform"]
     }
 

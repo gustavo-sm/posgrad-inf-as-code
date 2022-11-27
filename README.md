@@ -43,6 +43,10 @@ A autenticação para o GCP acontecerá com base no credentials.json conforme de
 
 6)  Aplicar com **terraform -chdir=aws apply** e **terraform -chdir=gcp apply**.
 
-Observação: durante a criação das instâncias de VM (ec2 e compute engine), as chaves privadas 	serão armazenadas da seguinte maneira localmente: 	<dir_do_provedor>/keys/instance_key_<id_da_chave>*
+**terraform -chdir=aws destroy** e **terraform -chdir=gcp destroy** para destruir a infraestrutura criada.
+
+Observação: durante a criação das instâncias de VM (ec2 e compute engine), as chaves privadas serão armazenadas da seguinte maneira, localmente: 	<dir_do_provedor>/keys/instance_key_<id_da_chave>*  
+Quando as VMs sao destruidas com o ```terraform destroy```, as chaves privadas previamente baixadas, também serão excluidas do host local.
+
 
 *o par de chaves está sendo criado com o recurso **tls_private_key**, ao executar o destroy nas instancias, a chave também será deletada do diretorio keys/ local.
